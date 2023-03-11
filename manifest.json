@@ -25,6 +25,7 @@
       ]
     }
   ],
+
   "browser_action": {
     "default_title": "My Extension",
     "default_icon": "check.png",

@@ -1,10 +1,22 @@
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector("#generate-response").addEventListener("click", function() {
+
+// import copy from 'copy-to-clipboard';
+document.addEventListener("DOMContentLoaded", async function() {
+  document.getElementById("copy").addEventListener("click",async function(){
+   
+      let text = document.getElementsByClassName('myText')[0];
+      if(text){await navigator.clipboard.writeText(text.textContent);}
+      else{await navigator.clipboard.writeText(null);}
+      console.log(text.textContent)
+      console.log('Content copied to clipboard');
+  
+  })
+    document.querySelector("#generate-response").addEventListener("click", async function() {
+      
       chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {action: "get_email_body"}, function(response) {
             console.log(response)
           var emailBody = response.body;
-          var apiKey = "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";
+          var apiKey = "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";
           var apiUrl = "https://api.openai.com/v1/completions";
           var headers = {
             "Content-Type": "application/json",
@@ -34,6 +46,4 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
   });
-  
-
-  
+ 
