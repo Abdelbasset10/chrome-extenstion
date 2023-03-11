@@ -2,21 +2,17 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#generate-response").addEventListener("click", function() {
       chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {action: "get_email_body"}, function(response) {
-            console.log('het')
             console.log(response.body)
           var emailBody = response.body;
-          console.log(emailBody)
           var prompt = emailBody + "\n\nQ:";
-          console.log(prompt)
-          var apiKey = "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";
+          var apiKey = "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";
           var apiUrl = "https://api.openai.com/v1/engines/davinci-codex/completions";
           var headers = {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + apiKey
           };
           var data = {
-            "prompt": prompt,
-            "max_tokens": 1024,
+            "prompt": "generate me reponse for this email " + emailBody + "\n\nQ:",
             "temperature": 0.7,
             "stop": "\n"
           };
@@ -37,3 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
   });
+  
+
+  
